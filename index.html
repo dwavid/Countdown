@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Countdown to July 13 Noon MT</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #111;
+      color: #fff;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      font-weight: 400;
+    }
+
+    #countdown {
+      display: flex;
+      gap: 1rem;
+      font-size: 3rem;
+      font-weight: bold;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .time-unit {
+      min-width: 70px;
+    }
+
+    .label {
+      font-size: 1rem;
+      font-weight: normal;
+      color: #aaa;
+      margin-top: 0.3rem;
+    }
+
+    @media (min-width: 768px) {
+      #countdown {
+        font-size: 4.5rem;
+      }
+
+      .label {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Countdown to July 13 at Noon (MT)</h1>
+  <div id="countdown">
+    <div class="time-unit"><span id="days">--</span><div class="label">Days</div></div>
+    <div class="time-unit"><span id="hours">--</span><div class="label">Hours</div></div>
+    <div class="time-unit"><span id="minutes">--</span><div class="label">Minutes</div></div>
+    <div class="time-unit"><span id="seconds">--</span><div class="label">Seconds</div></div>
+  </div>
+
+  <script>
+    function updateCountdown() {
+      // July 13 at 12:00 PM Mountain Time (UTC-6 or UTC-7 depending on DST)
+      const mountainTimeOffset = -6; // July is during Daylight Saving Time (MDT)
+      const now = new Date();
+
+      // Target date in UTC (convert MT to UTC)
+      const target = new Date(Date.UTC(2025, 6, 13, 18, 0, 0)); // July is month 6 (0-based), 12:00 MT == 18:00 UTC
+
+      const diff = target - now;
+
+      if (diff <= 0) {
+        document.getElementById("countdown").innerHTML = "<div>🎉 It's time! 🎉</div>";
+        return;
+      }
+
+      const seconds = Math.floor(diff / 1000) % 60;
+      const minutes = Math.floor(diff / 1000 / 60) % 60;
+      const hours = Math.floor(diff / 1000 / 60 / 60) % 24;
+      const days = Math.floor(diff / 1000 / 60 / 60 / 24);
+
+      document.getElementById("days").textContent = days;
+      document.getElementById("hours").textContent = String(hours).padStart(2, '0');
+      document.getElementById("minutes").textContent = String(minutes).padStart(2, '0');
+      document.getElementById("seconds").textContent = String(seconds).padStart(2, '0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
