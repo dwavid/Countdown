@@ -8,7 +8,7 @@
     body {
       margin: 0;
       padding: 0;
-      background: #111;
+      background: #000;
       color: #fff;
       font-family: 'Arial', sans-serif;
       display: flex;
@@ -17,12 +17,20 @@
       justify-content: center;
       height: 100vh;
       text-align: center;
+      animation: pulseBackground 6s infinite; /* 3s red + 3s black */
+    }
+
+    @keyframes pulseBackground {
+      0%   { background-color: black; }
+      50%  { background-color: red; }
+      100% { background-color: black; }
     }
 
     h1 {
-      font-size: 1.8rem;
+      font-size: 2rem;
       margin-bottom: 1rem;
-      font-weight: 400;
+      font-weight: bold;
+      text-transform: uppercase;
     }
 
     #countdown {
@@ -57,7 +65,7 @@
   </style>
 </head>
 <body>
-  <h1>Countdown to Nick & Diane</h1>
+  <h1>BRACE FOR IMPACT!</h1>
   <div id="countdown">
     <div class="time-unit"><span id="days">--</span><div class="label">Days</div></div>
     <div class="time-unit"><span id="hours">--</span><div class="label">Hours</div></div>
@@ -67,17 +75,14 @@
 
   <script>
     function updateCountdown() {
-      // July 13 at 12:00 PM Mountain Time (UTC-6 or UTC-7 depending on DST)
-      const mountainTimeOffset = -6; // July is during Daylight Saving Time (MDT)
+      // July 13 at 12:30 PM Mountain Time (UTC-6 during DST)
       const now = new Date();
-
-      // Target date in UTC (convert MT to UTC)
-      const target = new Date(Date.UTC(2025, 6, 13, 18, 30, 0)); // July is month 6 (0-based), 12:30 MT == 18:30 UTC
+      const target = new Date(Date.UTC(2025, 6, 13, 18, 30, 0)); // July = month 6
 
       const diff = target - now;
 
       if (diff <= 0) {
-        document.getElementById("countdown").innerHTML = "<div>🎉 It's time! 🎉</div>";
+        document.getElementById("countdown").innerHTML = "<div>🔥 IT IS UPON US 🔥</div>";
         return;
       }
 
